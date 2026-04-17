@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Dog Breed Classifier</title>
+    <!-- Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- TensorFlow.js and MobileNet -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>BreedLens</h1>
+            <p>Real-Time Dog Breed Detection</p>
+        </header>
+
+        <main>
+            <div class="camera-section">
+                <div class="video-container">
+                    <video id="webcam" autoplay playsinline muted></video>
+                    <div id="capture-overlay" class="capture-overlay"></div>
+                </div>
+                
+                <div class="controls">
+                    <button id="captureBtn" class="btn-primary" disabled>
+                        <span class="btn-text">Loading Model...</span>
+                    </button>
+                    <button id="switchCameraBtn" class="btn-icon" title="Switch Camera">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.928 11.607c-.202-.488-.635-.605-1.086-.605h-2.836c-.443 0-.825-.333-.94-.766l-.744-2.822c-.114-.433-.538-.788-.99-.788h-6.66c-.452 0-.877.355-.99.788l-.745 2.822c-.114.433-.497.766-.94.766H3.15c-.45 0-.883.117-1.085.605-.205.49-.07 1.05.285 1.4l1.39 1.39c.35.35.636 1.018.636 1.51v4.467c0 .992.81 1.797 1.804 1.797h11.632c.995 0 1.805-.805 1.805-1.797v-4.467c0-.492.285-1.16.635-1.51l1.39-1.39c.356-.35.49-.91.286-1.4zM12 17.5c-2.485 0-4.5-2.015-4.5-4.5s2.015-4.5 4.5-4.5 4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5z"/><path d="M12 10.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hidden canvas to grab video frames -->
+            <canvas id="canvas" style="display: none;"></canvas>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div id="resultsMessage" class="results-message" style="display: none;"></div>
+                
+                <div id="successResults">
+                    <h2>Analysis Complete</h2>
+                    
+                    <div class="detected-breed-card" id="detectedBreedCard">
+                        <!-- Captured image and primary breed will be shown here -->
+                    </div>
+                    
+                    <h3 class="similar-breeds-title">Similar Breeds</h3>
+                    <div id="breedCards" class="breed-cards-grid">
+                        <!-- Similar breed cards will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
